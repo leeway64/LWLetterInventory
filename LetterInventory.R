@@ -2,14 +2,14 @@
 
 
 calculate_inventory <- function(str){
-  inventory <- c()
+  inventory <- rep(0, 26)  # Create vector of 26 0's
   return(inventory)
 }
 
 
 LetterInventory <- setClass("LetterInventory", slots = list(
-                                                            inventory = calculate_inventory,
-                                                            size = length(str)))
+                                                            inventory = calculate_inventory(data),
+                                                            size = nchar(data)))
 
 
 setGeneric("get", function(LetterInventory) {
@@ -18,7 +18,14 @@ setGeneric("get", function(LetterInventory) {
 
 
 setMethod("get", signature(object = "LetterInventory"), 
-          function(LetterInventory){
+          function(LetterInventory, letter){
+            if (nchar(letter) != 1){
+              stop("Illegal argument exception: letter must be a single character")
+            } else if(grepl('[A-Za-z]+') == FALSE){
+              stop("Illegal argument exception: letter must be a character in the alphabet")
+            }else{
+              return(LetterInventory$letter)
+            }
           })
 
 
