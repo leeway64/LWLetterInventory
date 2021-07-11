@@ -2,13 +2,24 @@
 
 
 calculate_inventory <- function(str){
-  inventory <- rep(0, 26)  # Create vector of 26 0's
+  # Create vector of 26 0's. This is a vector of 26 counters (one per each letter)
+  inventory <- rep(0, 26)
+  alphabet <- letters[1:26]
+  # Split str into vector composed of individual letters
+  str_characters <- strsplit(tolower(str), "")[[1]]
+  for (character in str_characters){
+    if (grepl('[A-Za-z]+', character)){  # Returns TRUE if character is in the alphabet
+      # If character is 'a', letter_number is 1. If it's b', then letter_number is 2, etc.
+      letter_number <- match(character, alphabet)
+      # Increment the counter for that letter
+      inventory[letter_number] = 1 + inventory[letter_number]      
+    }
+  }  
   return(inventory)
 }
 
 
-LetterInventory <- setClass("LetterInventory", slots = list(
-                                                            inventory = calculate_inventory(data),
+LetterInventory <- setClass("LetterInventory", slots = list(inventory = calculate_inventory(data),
                                                             size = nchar(data)))
 
 
@@ -21,7 +32,7 @@ setMethod("get", signature(object = "LetterInventory"),
           function(LetterInventory, letter){
             if (nchar(letter) != 1){
               stop("Illegal argument exception: letter must be a single character")
-            } else if(grepl('[A-Za-z]+') == FALSE){
+            } else if(grepl('[A-Za-z]+', letter) == FALSE){
               stop("Illegal argument exception: letter must be a character in the alphabet")
             }else{
               return(LetterInventory$letter)
@@ -58,4 +69,13 @@ setGeneric("toString", function(LetterInventory) {
 
 setMethod("toString", signature(object = "LetterInventory"), 
           function(LetterInventory){
+            string_representation = "["
+            for (index in 1:length(LetterInventory@inventory)){
+              for (i in 1:LetterInventory@inventory[index]){
+                string_representation <- paste(string_representation,
+                                                                  LetterInventory@inventory[index])
+              }
+            }
+            string_representation <- paste(string_representation, "]")
+            return(string_representation)
           })
