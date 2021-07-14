@@ -24,61 +24,60 @@ calculate_inventory <- function(str){
 }
 
 
-LetterInventory <- setClass("LetterInventory", slots = list(inventory = calculate_inventory(data),
-                                                            size = nchar(data)))
+LetterInventory <- setClass("LetterInventory", slots = list(inventory = "vector",
+                                                            size = "numeric"))
 
 
-setGeneric("get", function(LetterInventory) {
+setGeneric("get", function(object, letter) {
   standardGeneric("get")
 })
 
 
 setMethod("get", signature(object = "LetterInventory"), 
-          function(LetterInventory, letter){
+          function(object, letter){
             if (nchar(letter) != 1){
               stop("Illegal argument exception: letter must be a single character")
             } else if(grepl('[A-Za-z]+', letter) == FALSE){
               stop("Illegal argument exception: letter must be a character in the alphabet")
             }else{
-              return(LetterInventory@inventory[convert_letter_to_number(letter)])
+              return(object@inventory[convert_letter_to_number(letter)])
             }
           })
 
 
-setGeneric("size", function(LetterInventory) {
+setGeneric("size", function(object) {
   standardGeneric("size")
 })
 
 
 setMethod("size", signature(object = "LetterInventory"), 
-          function(LetterInventory){
-            return(LetterInventory@size)
+          function(object){
+            return(object@size)
           })
 
 
-setGeneric("isEmpty", function(LetterInventory) {
+setGeneric("isEmpty", function(object) {
   standardGeneric("isEmpty")
 })
 
 
 setMethod("isEmpty", signature(object = "LetterInventory"), 
-          function(LetterInventory){
-            return(size == 0)
+          function(object){
+            return(object@size == 0)
           })
 
 
-setGeneric("toString", function(LetterInventory) {
+setGeneric("toString", function(object) {
   standardGeneric("toString")
 })
 
 
 setMethod("toString", signature(object = "LetterInventory"), 
-          function(LetterInventory){
+          function(object){
             string_representation = "["
-            for (index in 1:length(LetterInventory@inventory)){
-              for (i in 1:LetterInventory@inventory[index]){
-                string_representation <- paste(string_representation,
-                                                                  LetterInventory@inventory[index])
+            for (index in 1:length(object@inventory)){
+              for (i in 1:object@inventory[index]){
+                string_representation <- paste(string_representation, object@inventory[index])
               }
             }
             string_representation <- paste(string_representation, "]")
@@ -86,16 +85,32 @@ setMethod("toString", signature(object = "LetterInventory"),
           })
 
 
-setGeneric("set", function(LetterInventory) {
+setGeneric("set", function(object) {
   standardGeneric("set")
 })
 
 
-setGeneric("add", function(LetterInventory) {
+setMethod("set", signature(object = "LetterInventory"),
+          function(object){
+            
+          })
+
+
+setGeneric("add", function(object) {
   standardGeneric("add")
 })
 
 
-setGeneric("subtract", function(LetterInventory) {
+setMethod("add", signature(object = "LetterInventory"),
+          function(object){
+            
+          })
+
+setGeneric("subtract", function(object) {
   standardGeneric("subtract")
 })
+
+setMethod("subtract", signature(object = "LetterInventory"),
+          function(object){
+            
+          })
