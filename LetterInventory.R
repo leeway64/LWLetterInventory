@@ -85,14 +85,15 @@ setMethod("toString", signature(object = "LetterInventory"),
           })
 
 
-setGeneric("set", function(object) {
+setGeneric("set", function(object, letter, value) {
   standardGeneric("set")
 })
 
 
 setMethod("set", signature(object = "LetterInventory"),
-          function(object){
-            
+          function(object, letter, value){
+            letter_number <- convert_letter_to_number(letter)
+            object@inventory[letter_number] <- value
           })
 
 
