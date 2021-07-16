@@ -97,21 +97,23 @@ setMethod("set", signature(object = "LetterInventory"),
           })
 
 
-setGeneric("add", function(object) {
+setGeneric("add", function(object, other) {
   standardGeneric("add")
 })
 
 
 setMethod("add", signature(object = "LetterInventory"),
-          function(object){
+          function(object, other){
             
           })
 
-setGeneric("subtract", function(object) {
+
+setGeneric("subtract", function(object, other) {
   standardGeneric("subtract")
 })
 
+
 setMethod("subtract", signature(object = "LetterInventory"),
-          function(object){
+          function(object, other){
             
           })
