@@ -18,6 +18,16 @@ find_number_of_letters <- function(str){
 }
 
 
+test_find_number_of_letters <- function(){
+    test_that("0", expect_equal(find_number_of_letters("\\\\    .,.33321,.,>?"), 0))
+    test_that("1", expect_equal(find_number_of_letters(" b "), 1))
+    test_that("5", expect_equal(find_number_of_letters("hello"), 5))
+    test_that("10", expect_equal(find_number_of_letters("12abcdefghij12?/;;;"), 10))
+    test_that("15", expect_equal(find_number_of_letters("k l m n o p q rstuvwxy"), 15))
+    
+}
+
+
 test_convert_letter_to_number <- function(){
     test_that("a", expect_equal(convert_letter_to_number("a"), 1))
     test_that("b", expect_equal(convert_letter_to_number("b"), 2))
@@ -38,5 +48,7 @@ test_George_W_Bush_inventory <- function(string = "George W. Bush"){
 }
 
 
+
+test_find_number_of_letters()
 test_convert_letter_to_number()
 test_George_W_Bush_inventory()

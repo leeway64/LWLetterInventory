@@ -104,6 +104,7 @@ setGeneric("add", function(object, other) {
 
 setMethod("add", signature(object = "LetterInventory"),
           function(object, other){
+            inventory <- object@inventory
             
           })
 
