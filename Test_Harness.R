@@ -3,7 +3,6 @@
 library(testthat)
 source("LetterInventory.R")
 
-
 # Finds the number of letters in a string
 find_number_of_letters <- function(str){
     count = 0
@@ -48,7 +47,18 @@ test_George_W_Bush_inventory <- function(string = "George W. Bush"){
 }
 
 
+test_Hillary_Clinton_inventory <- function(string = "Hillary Clinton"){
+    inventory <- calculate_inventory(string)
+    test_that("Counts in inventory equal number of letters in string", expect_equal(sum(inventory),
+                                                                                    find_number_of_letters(string)))
+    test_that("h", expect_equal(inventory[convert_letter_to_number("h")], 1))
+    test_that("l", expect_equal(inventory[convert_letter_to_number("l")], 3))
+    test_that("a", expect_equal(inventory[convert_letter_to_number("a")], 1))
+    test_that("i", expect_equal(inventory[convert_letter_to_number("i")], 2))
+}
+
 
 test_find_number_of_letters()
 test_convert_letter_to_number()
 test_George_W_Bush_inventory()
+test_Hillary_Clinton_inventory()

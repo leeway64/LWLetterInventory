@@ -104,8 +104,10 @@ setGeneric("add", function(object, other) {
 
 setMethod("add", signature(object = "LetterInventory"),
           function(object, other){
-            inventory <- object@inventory
-            
+            inventory <- object@inventory + other@inventory
+            size = object@size + other@size
+            new_LetterInventory <- LetterInventory(inventory = inventory, size = size)
+            return(new_LetterInventory)
           })
 
 
