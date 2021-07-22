@@ -1,12 +1,14 @@
-# 
+# This class keeps track of the count of each letter in a string
 
 
+# Converts "a" to 1, "b" to 2, "c" to 3, and so on.
 convert_letter_to_number <- function(letter){
   alphabet <- letters[1:26]
   letter_number <- match(letter, alphabet)
 }
 
 
+# 
 calculate_inventory <- function(str){
   # Create vector of 26 0's. This is a vector of 26 counters (one per each letter)
   inventory <- rep(0, 26)
@@ -33,6 +35,7 @@ setGeneric("get", function(object, letter) {
 })
 
 
+# Returns the count of the letter
 setMethod("get", signature(object = "LetterInventory"), 
           function(object, letter){
             if (nchar(letter) != 1){
@@ -50,6 +53,7 @@ setGeneric("size", function(object) {
 })
 
 
+# Returns the object's size (how many letters it holds)
 setMethod("size", signature(object = "LetterInventory"), 
           function(object){
             return(object@size)
@@ -61,6 +65,7 @@ setGeneric("isEmpty", function(object) {
 })
 
 
+# Returns if the object contains no letters
 setMethod("isEmpty", signature(object = "LetterInventory"), 
           function(object){
             return(object@size == 0)
@@ -72,6 +77,7 @@ setGeneric("toString", function(object) {
 })
 
 
+# Converts the contents of the inventory into a readable format.
 setMethod("toString", signature(object = "LetterInventory"), 
           function(object){
             string_representation = "["
@@ -90,6 +96,7 @@ setGeneric("set", function(object, letter, value) {
 })
 
 
+# Sets a letter in the object's inventory to a certain value
 setMethod("set", signature(object = "LetterInventory"),
           function(object, letter, value){
             letter_number <- convert_letter_to_number(letter)
@@ -102,6 +109,7 @@ setGeneric("add", function(object, other) {
 })
 
 
+# Adds 2 LetterInventory objects together. Adds their sizes and counts.
 setMethod("add", signature(object = "LetterInventory"),
           function(object, other){
             inventory <- object@inventory + other@inventory
@@ -116,7 +124,20 @@ setGeneric("subtract", function(object, other) {
 })
 
 
+# Subtracts LetterInventory other from LetterInventory object. Subtracts the size of other from
+# object. Subtracts each count of other from each count of object. If any value would be negative,
+# then it is turned to 0. 
 setMethod("subtract", signature(object = "LetterInventory"),
           function(object, other){
-            
+            size = object@size - other@size
+            if (size < 0){
+              size = 0
+            }
+            inventory <- object@inventory - other@inventory
+            for (i in length(inventory)){
+              if (inventory[i] < 0){
+                inventory[i] = 0
+              }
+            }
+            new_LetterInventory <- LetterInventory(inventory = inventory, size = size)
           })
