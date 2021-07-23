@@ -3,19 +3,6 @@
 library(testthat)
 source("LetterInventory.R")
 
-# Finds the number of letters in a string
-find_number_of_letters <- function(str){
-    count = 0
-    # Split str into vector composed of individual letters
-    str_characters <- strsplit(tolower(str), "")[[1]]
-    for (character in str_characters){
-        if (grepl('[A-Za-z]+', character)){  # Increment count if character is in the alphabet
-            count = count + 1
-        }
-    }
-    return(count)
-}
-
 
 test_find_number_of_letters <- function(){
     test_that("0", expect_equal(find_number_of_letters("\\\\    .,.33321,.,>?"), 0))
@@ -23,7 +10,6 @@ test_find_number_of_letters <- function(){
     test_that("5", expect_equal(find_number_of_letters("hello"), 5))
     test_that("10", expect_equal(find_number_of_letters("12abcdefghij12?/;;;"), 10))
     test_that("15", expect_equal(find_number_of_letters("k l m n o p q rstuvwxy"), 15))
-    
 }
 
 
@@ -39,7 +25,7 @@ test_convert_letter_to_number <- function(){
 test_George_W_Bush_inventory <- function(string = "George W. Bush"){
     inventory <- calculate_inventory(string)
     test_that("Counts in inventory equal number of letters in string", expect_equal(sum(inventory),
-                                                                find_number_of_letters(string)))
+                                                                    find_number_of_letters(string)))
     test_that("b", expect_equal(inventory[convert_letter_to_number("b")], 1))
     test_that("g", expect_equal(inventory[convert_letter_to_number("g")], 2))
     test_that("r", expect_equal(inventory[convert_letter_to_number("r")], 1))
@@ -50,7 +36,7 @@ test_George_W_Bush_inventory <- function(string = "George W. Bush"){
 test_Hillary_Clinton_inventory <- function(string = "Hillary Clinton"){
     inventory <- calculate_inventory(string)
     test_that("Counts in inventory equal number of letters in string", expect_equal(sum(inventory),
-                                                                                    find_number_of_letters(string)))
+                                                                    find_number_of_letters(string)))
     test_that("h", expect_equal(inventory[convert_letter_to_number("h")], 1))
     test_that("l", expect_equal(inventory[convert_letter_to_number("l")], 3))
     test_that("a", expect_equal(inventory[convert_letter_to_number("a")], 1))
@@ -62,3 +48,12 @@ test_find_number_of_letters()
 test_convert_letter_to_number()
 test_George_W_Bush_inventory()
 test_Hillary_Clinton_inventory()
+
+string1 <- "hello!"
+inventory1 <- LetterInventory(string1)
+test_inventory1 <- function(inventory, string){
+    test_that("inventory has correct size", expect_equal(inventory@size,
+                                                                    find_number_of_letters(string)))
+}
+
+test_inventory1()

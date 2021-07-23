@@ -1,6 +1,20 @@
 # This class keeps track of the count of each letter in a string
 
 
+# Finds the number of letters in a string
+find_number_of_letters <- function(str){
+  count = 0
+  # Split str into vector composed of individual letters
+  str_characters <- strsplit(tolower(str), "")[[1]]
+  for (character in str_characters){
+    if (grepl('[A-Za-z]+', character)){  # Increment count if character is in the alphabet
+      count = count + 1
+    }
+  }
+  return(count)
+}
+
+
 # Converts "a" to 1, "b" to 2, "c" to 3, and so on.
 convert_letter_to_number <- function(letter){
   alphabet <- letters[1:26]
@@ -8,7 +22,9 @@ convert_letter_to_number <- function(letter){
 }
 
 
-# 
+# Finds the number of each letter in str and increments the appropriate counter. If there is an "a"
+# in str, the first counter would be incremented by 1. If there is a "z" in str, the 26th counter
+# would be incremented.
 calculate_inventory <- function(str){
   # Create vector of 26 0's. This is a vector of 26 counters (one per each letter)
   inventory <- rep(0, 26)
@@ -26,9 +42,15 @@ calculate_inventory <- function(str){
 }
 
 
-LetterInventory <- setClass("LetterInventory", slots = list(inventory = "vector",
-                                                            size = "numeric"))
+# LetterInventory generator function
+LetterInventory <- setClass("LetterInventory", slots = list(inventory = "vector", size = "numeric"))
 
+
+# LetterInventory constructor
+LetterInventory <- function(string_data){
+  LetterInventory(name = calculate_inventory(string_data),
+                                                        size = find_number_of_letters(string_data))
+}
 
 setGeneric("get", function(object, letter) {
   standardGeneric("get")
