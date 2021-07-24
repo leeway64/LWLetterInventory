@@ -48,12 +48,17 @@ test_find_number_of_letters()
 test_convert_letter_to_number()
 test_George_W_Bush_inventory()
 test_Hillary_Clinton_inventory()
+source("LetterInventory.R")
 
 string1 <- "hello!"
 inventory1 <- LetterInventory(string1)
 test_inventory1 <- function(inventory, string){
     test_that("inventory has correct size", expect_equal(inventory@size,
                                                                     find_number_of_letters(string)))
+    test_that("h", expect_equal(get(inventory, "h"), 1))
+    test_that("l", expect_equal(get(inventory, "l"), 2))
+    test_that("o", expect_equal(get(inventory, "o"), 1))
+    
 }
 
-test_inventory1()
+test_inventory1(inventory1, string1)

@@ -43,13 +43,13 @@ calculate_inventory <- function(str){
 
 
 # LetterInventory generator function
-LetterInventory <- setClass("LetterInventory", slots = list(inventory = "vector", size = "numeric"))
+setClass("LetterInventory", slots = list(inventory = "vector", size = "numeric"))
 
 
 # LetterInventory constructor
 LetterInventory <- function(string_data){
-  LetterInventory(name = calculate_inventory(string_data),
-                                                        size = find_number_of_letters(string_data))
+  return(new("LetterInventory", inventory = calculate_inventory(string_data), size =
+               find_number_of_letters(string_data)))
 }
 
 setGeneric("get", function(object, letter) {
