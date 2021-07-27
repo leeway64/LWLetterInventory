@@ -44,21 +44,43 @@ test_Hillary_Clinton_inventory <- function(string = "Hillary Clinton"){
 }
 
 
+string1 <- "hello!"
+inventory1 <- LetterInventory(string1)
+test_inventory_constructor <- function(inventory, string){
+    test_that("inventory has correct size", expect_equal(inventory@size,
+                                                         find_number_of_letters(string)))
+    test_that("h", expect_equal(get(inventory, "h"), 1))
+    test_that("e", expect_equal(get(inventory, "e"), 1))
+    test_that("l", expect_equal(get(inventory, "l"), 2))
+    test_that("o", expect_equal(get(inventory, "o"), 1))
+}
+
+
+test_get <- function(){
+    string1 <- "Barack Obama"
+    inventory1 <- LetterInventory(string1)
+
+    test_that("b", expect_equal(get(inventory1, "b"), 2))
+    test_that("a", expect_equal(get(inventory1, "a"), 4))
+    # get was already tested in test_inventory_constructor, so not many additinoal tests
+    # are necessary
+    
+    # Testing if exceptions are thrown. Uncomment the following lines to test.
+    # Input is multiple characters
+    get(inventory1, "abcd")
+
+    # Input is not a letter in the alphabet
+    get(inventory, "$")
+}
+
+
 test_find_number_of_letters()
 test_convert_letter_to_number()
 test_George_W_Bush_inventory()
 test_Hillary_Clinton_inventory()
-source("LetterInventory.R")
+test_inventory_constructor(inventory1, string1)
+test_get()
 
-string1 <- "hello!"
-inventory1 <- LetterInventory(string1)
-test_inventory1 <- function(inventory, string){
-    test_that("inventory has correct size", expect_equal(inventory@size,
-                                                                    find_number_of_letters(string)))
-    test_that("h", expect_equal(get(inventory, "h"), 1))
-    test_that("l", expect_equal(get(inventory, "l"), 2))
-    test_that("o", expect_equal(get(inventory, "o"), 1))
-    
-}
 
-test_inventory1(inventory1, string1)
+cat('\014')  # Clear console
+rm(list = ls())  # Clear variables

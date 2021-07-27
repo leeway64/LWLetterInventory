@@ -52,6 +52,7 @@ LetterInventory <- function(string_data){
                find_number_of_letters(string_data)))
 }
 
+
 setGeneric("get", function(object, letter) {
   standardGeneric("get")
 })
