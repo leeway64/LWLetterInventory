@@ -106,10 +106,11 @@ setMethod("toString", signature(object = "LetterInventory"),
             string_representation = "["
             for (index in 1:length(object@inventory)){
               for (i in 1:object@inventory[index]){
-                string_representation <- paste(string_representation, object@inventory[index])
+                letter <- letters[1:26][index]
+                string_representation <- paste(string_representation, letter, sep = "")
               }
             }
-            string_representation <- paste(string_representation, "]")
+            string_representation <- paste(string_representation, "]", sep = "")
             return(string_representation)
           })
 
