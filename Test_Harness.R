@@ -49,14 +49,14 @@ test_inventory_constructor <- function(){
     test_that("Size of inventory0", expect_equal(size(inventory0), 0))
     test_that("isEmpty", expect_equal(isEmpty(inventory0), TRUE))
     
-    string1 <- "hello!"
+    string1 <- "Hello!"
     inventory1 <- LetterInventory(string1)
     test_that("inventory has correct size", expect_equal(inventory1@size,
                                                          find_number_of_letters(string1)))
     test_that("h", expect_equal(get(inventory1, "h"), 1))
-    test_that("e", expect_equal(get(inventory1, "e"), 1))
+    test_that("e", expect_equal(get(inventory1, "E"), 1))
     test_that("l", expect_equal(get(inventory1, "l"), 2))
-    test_that("o", expect_equal(get(inventory1, "o"), 1))
+    test_that("o", expect_equal(get(inventory1, "O"), 1))
     test_that("o", expect_equal(get(inventory1, "o"), 1))
     test_that("Size of inventory1", expect_equal(size(inventory1), 5))
     
@@ -68,7 +68,7 @@ test_get_size_and_isEmpty <- function(){
     inventory1 <- LetterInventory(string1)
     test_that("isEmpty", expect_equal(isEmpty(inventory1), FALSE))
     
-    test_that("b", expect_equal(get(inventory1, "b"), 2))
+    test_that("b", expect_equal(get(inventory1, "B"), 2))
     test_that("a", expect_equal(get(inventory1, "a"), 4))
     test_that("size", expect_equal(size(inventory1), 11))
 
@@ -87,7 +87,27 @@ test_get_size_and_isEmpty <- function(){
 test_toString <- function(){
     string1 <- "Hillary Clinton"
     inventory1 <- LetterInventory(string1)
-    test_that("Hillary Clinton", expect_equal(toString(inventory1), "[achiilllmnorty]"))
+    test_that("Hillary Clinton", expect_equal(toString(inventory1), "[achiilllnnorty]"))
+    string2 <- "George W. Bush"
+    inventory2 <- LetterInventory(string2)
+    test_that("George W. Bush", expect_equal(toString(inventory2), "[beegghorsuw]"))
+}
+
+
+test_set <- function(){
+    string1 <- "Eddard Stark"
+    inventory1 <- LetterInventory(string1)
+    test_that("d", expect_equal(get(inventory1, "d"), 3))
+    # test_that("b", expect_equal(get(inventory1, "b"), 2))
+    test_that("a", expect_equal(get(inventory1, "a"), 2))
+    # test_that("b", expect_equal(get(inventory1, "b"), 2))
+    
+    # Testing if exceptions are thrown. Uncomment the following lines to test.
+    # Input is not a letter in the alphabet
+    # set(inventory1, "%", 0)
+    
+    # value is not positive
+    # set(inventory1, "z", -1)
 }
 
 
@@ -98,6 +118,7 @@ test_Hillary_Clinton_inventory()
 test_inventory_constructor()
 test_get_size_and_isEmpty()
 test_toString()
+test_set()
 
 
 cat('\014')  # Clear console

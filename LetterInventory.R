@@ -48,7 +48,7 @@ setClass("LetterInventory", slots = list(inventory = "vector", size = "numeric")
 
 # LetterInventory constructor
 LetterInventory <- function(string_data){
-  return(new("LetterInventory", inventory = calculate_inventory(string_data), size =
+  return(new("LetterInventory", inventory = calculate_inventory(tolower(string_data)), size =
                find_number_of_letters(string_data)))
 }
 
@@ -61,9 +61,10 @@ setGeneric("get", function(object, letter) {
 # Returns the count of the letter
 setMethod("get", signature(object = "LetterInventory"), 
           function(object, letter){
+            letter = tolower(letter)
             if (nchar(letter) != 1){
               stop("Illegal argument exception: letter must be a single character")
-            } else if(grepl('[A-Za-z]+', letter) == FALSE){
+            } else if(!grepl('[A-Za-z]+', letter)){
               stop("Illegal argument exception: letter must be a character in the alphabet")
             }else{
               return(object@inventory[convert_letter_to_number(letter)])
@@ -105,9 +106,13 @@ setMethod("toString", signature(object = "LetterInventory"),
           function(object){
             string_representation = "["
             for (index in 1:length(object@inventory)){
-              for (i in 1:object@inventory[index]){
-                letter <- letters[1:26][index]
-                string_representation <- paste(string_representation, letter, sep = "")
+              letter_count = object@inventory[index]
+              if (letter_count != 0){  # 1:0 creates a vector of 1, 0
+                for (i in 1:letter_count){
+                  letter <- letters[1:26][index]
+                  # print(letter)
+                  string_representation <- paste(string_representation, letter, sep = "")
+                }
               }
             }
             string_representation <- paste(string_representation, "]", sep = "")
@@ -123,8 +128,19 @@ setGeneric("set", function(object, letter, value) {
 # Sets a letter in the object's inventory to a certain value
 setMethod("set", signature(object = "LetterInventory"),
           function(object, letter, value){
-            letter_number <- convert_letter_to_number(letter)
-            object@inventory[letter_number] <- value
+            if (!grepl('[A-Za-z]+', letter))
+            {
+              stop("Illegal argument exception: letter must be a character in the alphabet")
+            }
+            else if (value < 0)
+            {
+              stop("Illegal argument exception: value must be positive")
+            }
+            else
+            {
+              letter_number <- convert_letter_to_number(letter)
+              object@inventory[letter_number] = value 
+            }
           })
 
 
