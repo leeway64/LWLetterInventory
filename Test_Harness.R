@@ -97,10 +97,14 @@ test_toString <- function(){
 test_set <- function(){
     string1 <- "Eddard Stark"
     inventory1 <- LetterInventory(string1)
+    
     test_that("d", expect_equal(get(inventory1, "d"), 3))
-    # test_that("b", expect_equal(get(inventory1, "b"), 2))
+    set(inventory1, "D", 5)
+    test_that("Set 'd' to 5", expect_equal(get(inventory1, "d"), 5))
+    
     test_that("a", expect_equal(get(inventory1, "a"), 2))
-    # test_that("b", expect_equal(get(inventory1, "b"), 2))
+    set(inventory1, "a", 99)
+    test_that("Set 'a' to 99", expect_equal(get(inventory1, "a"), 99))
     
     # Testing if exceptions are thrown. Uncomment the following lines to test.
     # Input is not a letter in the alphabet

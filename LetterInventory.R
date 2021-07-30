@@ -138,8 +138,10 @@ setMethod("set", signature(object = "LetterInventory"),
             }
             else
             {
+              letter <- tolower(letter)
               letter_number <- convert_letter_to_number(letter)
-              object@inventory[letter_number] = value 
+              # Modify the object in-place
+              eval.parent(substitute(object@inventory[letter_number] <- value))
             }
           })
 
