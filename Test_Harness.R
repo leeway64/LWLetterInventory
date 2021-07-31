@@ -115,6 +115,22 @@ test_set <- function(){
 }
 
 
+# Test each of the inventory's member functions
+test_inventory <- function(letter_inventory){
+    
+}
+
+
+test_add <- function(){
+    
+}
+
+
+test_subtract <- function(){
+    
+}
+
+
 test_find_number_of_letters()
 test_convert_letter_to_number()
 test_George_W_Bush_inventory()
@@ -123,6 +139,8 @@ test_inventory_constructor()
 test_get_size_and_isEmpty()
 test_toString()
 test_set()
+test_add()
+test_subtract()
 
 
 cat('\014')  # Clear console
