@@ -116,7 +116,7 @@ setMethod("toString", signature(object = "LetterInventory"),
               letter_count = object@inventory[index]
               if (letter_count != 0){  # 1:0 creates a vector of 1, 0
                 for (i in 1:letter_count){
-                  letter <- letters[1:alphabet][index]
+                  letter <- letters[1:alphabet_size][index]
                   string_representation <- paste(string_representation, letter, sep = "")
                 }
               }
@@ -165,8 +165,7 @@ setMethod("add", signature(object = "LetterInventory"),
           function(object, other){
             inventory <- object@inventory + other@inventory
             size = object@size + other@size
-            new_LetterInventory <- LetterInventory(inventory = inventory, size = size)
-            return(new_LetterInventory)
+            return(new("LetterInventory", inventory = inventory, size = size))
           })
 
 
@@ -181,15 +180,8 @@ setGeneric("subtract", function(object, other) {
 # Returns a new letterInventory with the difference of the inventories and sizes.
 setMethod("subtract", signature(object = "LetterInventory"),
           function(object, other){
-            size = object@size - other@size
-            if (size < 0){
-              size = 0
-            }
             inventory <- object@inventory - other@inventory
-            for (i in length(inventory)){
-              if (inventory[i] < 0){
-                inventory[i] = 0
-              }
-            }
-            new_LetterInventory <- LetterInventory(inventory = inventory, size = size)
+            inventory <- replace(inventory, inventory < 0, 0)
+            size = sum(inventory)
+            return(new("LetterInventory", inventory = inventory, size = size))
           })

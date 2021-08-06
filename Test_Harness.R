@@ -122,13 +122,38 @@ test_inventory <- function(letter_inventory){
 
 
 test_add <- function(){
+    string0 = "George W. Bush"
+    inventory0 <- LetterInventory(string0)
+    string1 <- "Hillary Clinton"
+    inventory1 <- LetterInventory(string1)
+    
+    inventory2 <- add(inventory0, inventory1)
+    test_that("[abceegghhiilllnnoorrstuwy]", expect_equal(toString(inventory2),
+                                                                "[abceegghhiilllnnoorrstuwy]"))
+    test_that("size", expect_equal(size(inventory2), inventory0@size + inventory1@size))
     
 }
 
 
 test_subtract <- function(){
+    string0 = "vwxyz"
+    inventory0 <- LetterInventory(string0)
+    string1 = "abcd"
+    inventory1 <- LetterInventory(string1)
+    
+    inventoryA <- subtract(inventory0, inventory1)
+    test_that("size", expect_equal(size(inventoryA), 5))
+    
+    string2 = "abcd"
+    inventory2 <- LetterInventory(string2)
+    string3 = "abc"
+    inventory3 <- LetterInventory(string3)
+    
+    inventoryB <- subtract(inventory2, inventory3)
+    test_that("size", expect_equal(size(inventoryB), 1))
     
 }
+source("LetterInventory.R")
 
 
 test_find_number_of_letters()
