@@ -115,12 +115,6 @@ test_set <- function(){
 }
 
 
-# Test each of the inventory's member functions
-test_inventory <- function(letter_inventory){
-    
-}
-
-
 test_add <- function(){
     string0 = "George W. Bush"
     inventory0 <- LetterInventory(string0)
@@ -143,6 +137,7 @@ test_subtract <- function(){
     
     inventoryA <- subtract(inventory0, inventory1)
     test_that("size", expect_equal(size(inventoryA), 5))
+    test_that("[vwxyz]", expect_equal(toString(inventoryA), "[vwxyz]"))
     
     string2 = "abcd"
     inventory2 <- LetterInventory(string2)
@@ -151,6 +146,7 @@ test_subtract <- function(){
     
     inventoryB <- subtract(inventory2, inventory3)
     test_that("size", expect_equal(size(inventoryB), 1))
+    test_that("[d]", expect_equal(toString(inventoryB), "[d]"))
     
 }
 source("LetterInventory.R")
