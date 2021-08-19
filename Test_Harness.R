@@ -1,8 +1,9 @@
 # Test harness for LetterInventory.R
 
 library(testthat)
-source("LetterInventory.R")
-
+library(here)
+source(here('LetterInventory.R'))
+              
 
 test_find_number_of_letters <- function(){
     test_that("0", expect_equal(find_number_of_letters("\\\\    .,.33321,.,>?"), 0))
@@ -149,7 +150,6 @@ test_subtract <- function(){
     test_that("[d]", expect_equal(toString(inventoryB), "[d]"))
     
 }
-source("LetterInventory.R")
 
 
 test_find_number_of_letters()
@@ -162,7 +162,3 @@ test_toString()
 test_set()
 test_add()
 test_subtract()
-
-
-cat('\014')  # Clear console
-rm(list = ls())  # Clear variables
