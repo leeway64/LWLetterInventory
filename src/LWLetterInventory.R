@@ -46,7 +46,7 @@ calculate_inventory <- function(str){
 }
 
 
-# LWLetterInventory generator function
+# LWLetterInventory generator function. This is an S4 class.
 setClass("LWLetterInventory", slots = list(inventory = "vector", size = "numeric"))
 
 

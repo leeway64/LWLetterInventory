@@ -8,5 +8,5 @@ this project follows [semantic versioning](https://semver.org/).
 ## Unreleased
 - 
 
-## [major.minor.patch] - yyyy-m-d
+## [1.0.0] - 2023-4-d
 -

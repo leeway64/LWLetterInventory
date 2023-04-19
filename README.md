@@ -1,10 +1,26 @@
-# Letter Inventory
+# LWLetterInventory
 
-This project creates an R class that holds an inventory of letters.
+LWLetterInventory is an R class that holds an inventory of letters. That is, it can store how many
+of each letter are in a string, along with other features.
+
+
+## Installation
+```bash
+git clone https://github.com/leeway64/LWLetterInventory.git
+cd LWLetterInventory
+R
+renv::restore()
+```
+
+`renv` stands for reproducible environments. To learn more about `renv`, refer to [their introduction page](https://rstudio.github.io/renv/articles/renv.html).
 
 
 ## Unit tests
-
+To run unit tests, run:
+```bash
+R
+testthat::test_dir(here::here("test"))
+```
 
 ## Acknowledgements
 The specifications for this project are provided on the
@@ -12,6 +28,8 @@ The specifications for this project are provided on the
 The original assignment was meant to be completed in Java, but I completed it in R for this project.
 
 
-## Thir-party software
-
-- [here]()
+## Third-party software
+- [renv](https://rstudio.github.io/renv/index.html) (MIT License): Reproducible environments for R
+- [here](https://here.r-lib.org/) (MIT License): Easy file referencing for R
+- [testthat](https://testthat.r-lib.org/) (MIT License): R unit testing library
+- [box](https://klmr.me/box/) (MIT License): R library for modular code

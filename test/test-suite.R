@@ -64,6 +64,8 @@ test_inventory_constructor <- function(){
 }
 
 
+# get was already tested in test_inventory_constructor, so not many additional tests for get are
+# necessary here
 test_get_size_and_isEmpty <- function(){
     string1 <- "Barack Obama"
     inventory1 <- LWLetterInventory(string1)
@@ -72,9 +74,6 @@ test_get_size_and_isEmpty <- function(){
     test_that("b", expect_equal(get(inventory1, "B"), 2))
     test_that("a", expect_equal(get(inventory1, "a"), 4))
     test_that("size", expect_equal(size(inventory1), 11))
-
-    # get was already tested in test_inventory_constructor, so not many additional tests
-    # are necessary
     
     # Testing if exceptions are thrown. Uncomment the following lines to test.
     # Input is multiple characters
@@ -152,13 +151,16 @@ test_subtract <- function(){
 }
 
 
-test_find_number_of_letters()
-test_convert_letter_to_number()
-test_George_W_Bush_inventory()
-test_Hillary_Clinton_inventory()
-test_inventory_constructor()
-test_get_size_and_isEmpty()
-test_toString()
-test_set()
-test_add()
-test_subtract()
+if (is.null(box::name()))
+{
+    test_find_number_of_letters()
+    test_convert_letter_to_number()
+    test_George_W_Bush_inventory()
+    test_Hillary_Clinton_inventory()
+    test_inventory_constructor()
+    test_get_size_and_isEmpty()
+    test_toString()
+    test_set()
+    test_add()
+    test_subtract()
+}
