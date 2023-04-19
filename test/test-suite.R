@@ -1,8 +1,8 @@
-# Test harness for LetterInventory.R
+# Test suite for LWLWLetterInventory.R
 
 library(testthat)
 library(here)
-source(here('LetterInventory.R'))
+source(here('LWLWLetterInventory.R'))
               
 
 test_find_number_of_letters <- function(){
@@ -46,12 +46,12 @@ test_Hillary_Clinton_inventory <- function(string = "Hillary Clinton"){
 
 
 test_inventory_constructor <- function(){
-    inventory0 <- LetterInventory("")
+    inventory0 <- LWLetterInventory("")
     test_that("Size of inventory0", expect_equal(size(inventory0), 0))
     test_that("isEmpty", expect_equal(isEmpty(inventory0), TRUE))
     
     string1 <- "Hello!"
-    inventory1 <- LetterInventory(string1)
+    inventory1 <- LWLetterInventory(string1)
     test_that("inventory has correct size", expect_equal(inventory1@size,
                                                          find_number_of_letters(string1)))
     test_that("h", expect_equal(get(inventory1, "h"), 1))
@@ -66,7 +66,7 @@ test_inventory_constructor <- function(){
 
 test_get_size_and_isEmpty <- function(){
     string1 <- "Barack Obama"
-    inventory1 <- LetterInventory(string1)
+    inventory1 <- LWLetterInventory(string1)
     test_that("isEmpty", expect_equal(isEmpty(inventory1), FALSE))
     
     test_that("b", expect_equal(get(inventory1, "B"), 2))
@@ -87,17 +87,17 @@ test_get_size_and_isEmpty <- function(){
 
 test_toString <- function(){
     string1 <- "Hillary Clinton"
-    inventory1 <- LetterInventory(string1)
+    inventory1 <- LWLetterInventory(string1)
     test_that("Hillary Clinton", expect_equal(toString(inventory1), "[achiilllnnorty]"))
     string2 <- "George W. Bush"
-    inventory2 <- LetterInventory(string2)
+    inventory2 <- LWLetterInventory(string2)
     test_that("George W. Bush", expect_equal(toString(inventory2), "[beegghorsuw]"))
 }
 
 
 test_set <- function(){
     string1 <- "Eddard Stark"
-    inventory1 <- LetterInventory(string1)
+    inventory1 <- LWLetterInventory(string1)
     
     test_that("d", expect_equal(get(inventory1, "d"), 3))
     set(inventory1, "D", 5)
@@ -118,9 +118,9 @@ test_set <- function(){
 
 test_add <- function(){
     string0 = "George W. Bush"
-    inventory0 <- LetterInventory(string0)
+    inventory0 <- LWLetterInventory(string0)
     string1 <- "Hillary Clinton"
-    inventory1 <- LetterInventory(string1)
+    inventory1 <- LWLetterInventory(string1)
     
     inventory2 <- add(inventory0, inventory1)
     test_that("[abceegghhiilllnnoorrstuwy]", expect_equal(toString(inventory2),
@@ -132,18 +132,18 @@ test_add <- function(){
 
 test_subtract <- function(){
     string0 = "vwxyz"
-    inventory0 <- LetterInventory(string0)
+    inventory0 <- LWLetterInventory(string0)
     string1 = "abcd"
-    inventory1 <- LetterInventory(string1)
+    inventory1 <- LWLetterInventory(string1)
     
     inventoryA <- subtract(inventory0, inventory1)
     test_that("size", expect_equal(size(inventoryA), 5))
     test_that("[vwxyz]", expect_equal(toString(inventoryA), "[vwxyz]"))
     
     string2 = "abcd"
-    inventory2 <- LetterInventory(string2)
+    inventory2 <- LWLetterInventory(string2)
     string3 = "abc"
-    inventory3 <- LetterInventory(string3)
+    inventory3 <- LWLetterInventory(string3)
     
     inventoryB <- subtract(inventory2, inventory3)
     test_that("size", expect_equal(size(inventoryB), 1))

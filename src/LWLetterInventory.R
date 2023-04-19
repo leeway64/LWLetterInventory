@@ -46,13 +46,13 @@ calculate_inventory <- function(str){
 }
 
 
-# LetterInventory generator function
-setClass("LetterInventory", slots = list(inventory = "vector", size = "numeric"))
+# LWLetterInventory generator function
+setClass("LWLetterInventory", slots = list(inventory = "vector", size = "numeric"))
 
 
-# LetterInventory constructor
-LetterInventory <- function(string_data){
-  return(new("LetterInventory", inventory = calculate_inventory(tolower(string_data)), size =
+# LWLetterInventory constructor
+LWLetterInventory <- function(string_data){
+  return(new("LWLetterInventory", inventory = calculate_inventory(tolower(string_data)), size =
                find_number_of_letters(string_data)))
 }
 
@@ -65,7 +65,7 @@ setGeneric("get", function(object, letter) {
 # Returns the count of the letter
 # If more than 1 character is passed into letter or if letter is not alphabetic, an illegal
 # argument exception is thrown.
-setMethod("get", signature(object = "LetterInventory"), 
+setMethod("get", signature(object = "LWLetterInventory"), 
           function(object, letter){
             letter = tolower(letter)
             if (nchar(letter) != 1){
@@ -84,7 +84,7 @@ setGeneric("size", function(object) {
 
 
 # Returns the object's size (how many letters it holds)
-setMethod("size", signature(object = "LetterInventory"), 
+setMethod("size", signature(object = "LWLetterInventory"), 
           function(object){
             return(object@size)
           })
@@ -96,7 +96,7 @@ setGeneric("isEmpty", function(object) {
 
 
 # Returns if the object contains no letters
-setMethod("isEmpty", signature(object = "LetterInventory"), 
+setMethod("isEmpty", signature(object = "LWLetterInventory"), 
           function(object){
             return(object@size == 0)
           })
@@ -109,7 +109,7 @@ setGeneric("toString", function(object) {
 
 # Returns a string representation of the inventory, converting the contents of the inventory into
 # a readable format.
-setMethod("toString", signature(object = "LetterInventory"), 
+setMethod("toString", signature(object = "LWLetterInventory"), 
           function(object){
             string_representation = "["
             for (index in 1:length(object@inventory)){
@@ -134,7 +134,7 @@ setGeneric("set", function(object, letter, value) {
 # Sets a letter in the object's inventory to a certain value
 # letter must be a letter in the alphabet, an illegal argument exception will be thrown if not
 # value must be positive, an illegal argument exception will be thrown if not
-setMethod("set", signature(object = "LetterInventory"),
+setMethod("set", signature(object = "LWLetterInventory"),
           function(object, letter, value){
             if (!grepl('[A-Za-z]+', letter))
             {
@@ -159,13 +159,13 @@ setGeneric("add", function(object, other) {
 })
 
 
-# Adds 2 LetterInventory objects together. Adds their inventories and sizes. Returns a new
-# LetterInventory with the sum of their inventories and sizes.
-setMethod("add", signature(object = "LetterInventory"),
+# Adds 2 LWLetterInventory objects together. Adds their inventories and sizes. Returns a new
+# LWLetterInventory with the sum of their inventories and sizes.
+setMethod("add", signature(object = "LWLetterInventory"),
           function(object, other){
             inventory <- object@inventory + other@inventory
             size = object@size + other@size
-            return(new("LetterInventory", inventory = inventory, size = size))
+            return(new("LWLetterInventory", inventory = inventory, size = size))
           })
 
 
@@ -174,14 +174,14 @@ setGeneric("subtract", function(object, other) {
 })
 
 
-# Subtracts LetterInventory other from LetterInventory object. Subtracts the size of other from
+# Subtracts LWLetterInventory other from LWLetterInventory object. Subtracts the size of other from
 # object. Subtracts each count of other from each count of object. If any value would be negative,
 # then it is turned to 0.
-# Returns a new letterInventory with the difference of the inventories and sizes.
-setMethod("subtract", signature(object = "LetterInventory"),
+# Returns a new LWLetterInventory with the difference of the inventories and sizes.
+setMethod("subtract", signature(object = "LWLetterInventory"),
           function(object, other){
             inventory <- object@inventory - other@inventory
             inventory <- replace(inventory, inventory < 0, 0)
             size = sum(inventory)
-            return(new("LetterInventory", inventory = inventory, size = size))
+            return(new("LWLetterInventory", inventory = inventory, size = size))
           })
