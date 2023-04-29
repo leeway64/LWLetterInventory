@@ -1,8 +1,8 @@
-# Test suite for LWLWLetterInventory.R
+# Test suite for LWLetterInventory.R
 
 library(testthat)
 library(here)
-source(here('LWLWLetterInventory.R'))
+source(here('src/LWLetterInventory.R'))
               
 
 test_find_number_of_letters <- function(){
