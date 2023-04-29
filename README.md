@@ -1,5 +1,8 @@
 # LWLetterInventory
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/leeway64/LWLetterInventory)
+
 LWLetterInventory is an R class that holds an inventory of letters. That is, it can store how many
 of each letter are in a string, along with other features.
 
@@ -21,6 +24,7 @@ To run unit tests, run:
 R
 testthat::test_dir(here::here("test"))
 ```
+
 
 ## Acknowledgements
 The specifications for this project are provided on the

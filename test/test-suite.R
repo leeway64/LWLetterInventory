@@ -75,12 +75,13 @@ test_get_size_and_isEmpty <- function(){
     test_that("a", expect_equal(get(inventory1, "a"), 4))
     test_that("size", expect_equal(size(inventory1), 11))
     
-    # Testing if exceptions are thrown. Uncomment the following lines to test.
+    
+    # Testing exceptions
     # Input is multiple characters
-    # get(inventory1, "abcd")
+    expect_error(get(inventory1, "abcd"))
 
     # Input is not a letter in the alphabet
-    # get(inventory1, "$")
+    expect_error(get(inventory1, "$"))
 }
 
 
@@ -106,12 +107,13 @@ test_set <- function(){
     set(inventory1, "a", 99)
     test_that("Set 'a' to 99", expect_equal(get(inventory1, "a"), 99))
     
-    # Testing if exceptions are thrown. Uncomment the following lines to test.
+    
+    # Testing exceptions
     # Input is not a letter in the alphabet
-    # set(inventory1, "%", 0)
+    expect_error(set(inventory1, "%", 0))
     
     # value is not positive
-    # set(inventory1, "z", -1)
+    expect_error(set(inventory1, "z", -1))
 }
 
 
